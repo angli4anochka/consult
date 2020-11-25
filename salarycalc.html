@@ -1,0 +1,77 @@
+<div id="fulldiv">
+  <p>Расчетный калькулятор заработной платы</p>
+     
+  <p>Зарплата после вычета налогов
+  <input type="text" name="wage" id="txt_wage" value ="0"/></p>
+  <p>Выберите месяц
+    <select id ="month">
+      <option value ="nov">Ноябрь 2020</option>
+      <option value ="dec">Декабрь 2020</option>
+      <option value ="jan">Январь 2021</option>
+      <option value ="feb">Февраль 2021</option>
+      <option value ="march">Март 2021</option>
+      <option value ="april">Апрель 2021</option>
+      <option value ="may">Май 2021</option>
+      <option value ="june">Июнь 2021</option>
+      <option value ="july">Июль 2021</option>
+      <option value ="august">Август 2021</option>
+      <option value ="sept">Сентябрь 2021</option>
+      <option value ="oct">Октябрь 2021</option>
+      <option value ="nov">Ноябрь 2021</option>
+      <option value ="decem">Декабрь 2021</option>
+    </select></p>
+     
+  <p>Количество смен в месяце
+  <input type="text" name="hours" id="txt_hours" value= "0"/> 
+  
+  <button value="calculate" onclick="calcSalary()">Расчитать зарплату</button></p>
+ <p>Количество отработанных смен
+  <input type="text" name="avans" id="txt_avans" value= "0"/>
+  <button value ="count" onclick ="calcSalary()">Расчитать аванс</button></p>
+  
+  <p id="results"></p>
+  <p id="payment_results"></p>
+     
+   <script type="text/javascript">
+  
+  function calcSalary() {
+      var wage_element = document.getElementById('txt_wage');
+      var wage = parseInt(wage_element.value);
+      var month_element = document.getElementById('month');
+      var month = parseInt(month_element.value)
+      var hours_element = document.getElementById('txt_hours');
+      var hours = parseInt(hours_element.value);
+      var payment_element = document.getElementById('txt_avans');
+      var payment = parseInt(payment_element.value);
+      var selectedIndex = month_element.options.selectedIndex;
+      var value = month_element[selectedIndex].value;
+      var shifts = hours * 11;
+      var oklad = 30450;
+      var paymentShifts = payment*11;
+
+
+      let month_num = {
+      "nov" : 159,
+      "dec" : 183,
+      "jan" : 120,
+      "feb" : 151,
+      "march" : 176,
+      "april" : 175,
+      "may" : 152,
+      "june" : 167,
+      "july" : 176,
+      "august" : 176,
+      "sept" : 176,
+      "oct" : 168,
+      "nov" : 159,
+      "decem" : 176
+      }
+
+
+      var calculate = wage / month_num[value] * shifts;
+      var avanse = oklad / month_num[value] * paymentShifts;
+      document.getElementById('results').innerHTML = calculate;
+      document.getElementById('payment_results').innerHTML = avanse;
+     };
+ 
+  </script>
